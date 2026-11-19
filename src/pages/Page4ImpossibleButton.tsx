@@ -60,6 +60,11 @@ export const Page4ImpossibleButton: React.FC<Page4ImpossibleButtonProps> = ({
     setIsJumping(true);
     setTimeout(() => setIsJumping(false), 300);
 
+    // Haptic feedback on mobile devices
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try { navigator.vibrate(25); } catch {}
+    }
+
     setDodgeCount((prev) => {
       const next = prev + 1;
       if (next >= 25) {
@@ -100,8 +105,8 @@ export const Page4ImpossibleButton: React.FC<Page4ImpossibleButtonProps> = ({
     }
 
     setCoords({
-      leftPercent: Math.max(15, Math.min(85, newLeftPercent)),
-      topPercent: Math.max(40, Math.min(85, newTopPercent)),
+      leftPercent: Math.max(26, Math.min(74, newLeftPercent)),
+      topPercent: Math.max(42, Math.min(80, newTopPercent)),
     });
   }, [isFrozen, taunts]);
 
@@ -180,8 +185,9 @@ export const Page4ImpossibleButton: React.FC<Page4ImpossibleButtonProps> = ({
         {/* Interactive Dodge Arena */}
         <div
           ref={arenaRef}
+          onTouchStart={handleTouch}
           onTouchMove={handleTouch}
-          className="relative w-full h-80 sm:h-96 rounded-3xl bg-cyan-100 border-4 border-black overflow-hidden p-4 shadow-[6px_6px_0px_#000] select-none"
+          className="relative w-full h-72 sm:h-96 rounded-3xl bg-cyan-100 border-4 border-black overflow-hidden p-3 sm:p-4 shadow-[6px_6px_0px_#000] select-none"
         >
           {/* Subtle Cartoon Polka Dots Background */}
           <div className="absolute inset-0 bg-[radial-gradient(#0284c7_2px,transparent_2px)] [background-size:24px_24px] opacity-25 pointer-events-none" />

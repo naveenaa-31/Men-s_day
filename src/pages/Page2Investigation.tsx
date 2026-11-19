@@ -61,7 +61,7 @@ export const Page2Investigation: React.FC<Page2InvestigationProps> = ({
       </div>
 
       {/* Main Cartoon Question Card */}
-      <div className="w-full cartoon-card p-6 sm:p-9 text-slate-900 shadow-[8px_8px_0px_#000]">
+      <div className="w-full cartoon-card p-4 sm:p-9 text-slate-900 shadow-[8px_8px_0px_#000]">
         {/* Header Section */}
         <div className="text-center mb-5">
           <h2 className="text-2xl sm:text-4xl font-black text-black tracking-tight mb-2 uppercase drop-shadow-[1px_1px_0px_#fff]">

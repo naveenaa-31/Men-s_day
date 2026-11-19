@@ -37,7 +37,7 @@ export const Page1NameEntry: React.FC<Page1NameEntryProps> = ({ onNameSubmitted,
       </div>
 
       {/* Main Cartoon Card */}
-      <div className="w-full cartoon-card p-7 sm:p-10 text-center relative overflow-visible transform rotate-0 hover:-rotate-0.5 transition-transform">
+      <div className="w-full cartoon-card p-5 sm:p-10 text-center relative overflow-visible transform rotate-0 hover:-rotate-0.5 transition-transform">
         {/* Cartoon Corner Stickers */}
         <div className="absolute -top-4 -right-3 px-3 py-1 bg-pink-400 text-black font-black text-xs rounded-xl border-3 border-black shadow-[3px_3px_0px_#000] transform rotate-12 animate-wiggle">
           BOOM! 💥

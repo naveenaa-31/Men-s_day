@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
   body {
     background-color: #0f172a;
     background-image: 
@@ -11,7 +14,11 @@
     background-size: 32px 32px;
     background-position: 0 0, 16px 16px;
     min-height: 100vh;
+    min-height: 100dvh;
     font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+    touch-action: manipulation;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 

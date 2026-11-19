@@ -112,7 +112,7 @@ export const Page3AWomanRejection: React.FC<Page3AWomanRejectionProps> = ({
       </div>
 
       {/* Main Cartoon Princess Palace Card */}
-      <div className="w-full cartoon-card p-6 sm:p-10 text-center bg-pink-100 shadow-[10px_10px_0px_#ff2a85] border-4 border-black">
+      <div className="w-full cartoon-card p-4 sm:p-10 text-center bg-pink-100 shadow-[8px_8px_0px_#ff2a85] border-4 border-black">
         {/* Royal Crest / Floating Tiara */}
         <div className="relative mx-auto w-28 h-28 mb-3 flex items-center justify-center">
           <div

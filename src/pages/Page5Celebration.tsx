@@ -81,8 +81,8 @@ export const Page5Celebration: React.FC<Page5CelebrationProps> = ({
       </div>
 
       {/* Main Congratulations Header */}
-      <div className="text-center mb-8 max-w-2xl">
-        <h1 className="text-4xl sm:text-7xl font-black text-white tracking-tight mb-2 drop-shadow-[4px_4px_0px_#000] uppercase">
+      <div className="text-center mb-8 max-w-2xl px-2">
+        <h1 className="text-3xl sm:text-7xl font-black text-white tracking-tight mb-2 drop-shadow-[4px_4px_0px_#000] uppercase">
           CONGRATULATIONS, <span className="text-yellow-300 underline decoration-pink-500 decoration-wavy">{userName.toUpperCase()}</span>!
         </h1>
         <p className="text-xl sm:text-3xl font-black text-cyan-300 mb-2 drop-shadow-[2px_2px_0px_#000] uppercase">
