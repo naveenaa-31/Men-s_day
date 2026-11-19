@@ -2,11 +2,12 @@ import React, { useMemo } from 'react';
 
 interface Particle {
   id: number;
-  emoji: string;
+  item: string;
   left: number;
   duration: number;
   delay: number;
   size: number;
+  isSticker?: boolean;
 }
 
 interface FloatingParticlesProps {
@@ -14,53 +15,75 @@ interface FloatingParticlesProps {
 }
 
 export const FloatingParticles: React.FC<FloatingParticlesProps> = ({ theme = 'cool' }) => {
-  const emojiSet = useMemo(() => {
+  const items = useMemo(() => {
     switch (theme) {
       case 'princess':
-        return ['👑', '💖', '✨', '💅', '🌸', '🎀', '🪞', '🍓', '💄', '🦄', '👠', '🪄', '🧁', '💎', '🩰', '🌷', '👛', '👸'];
+        return [
+          '👑', '💖', '✨', '💅', '🌸', '🎀', '🪞', '🍓', '💄', '🦄', '👠', '🪄', '🧁', '💎',
+          'SLAY! 💅', 'QUEEN! 👑', 'XOXO 💖', 'SPARKLE ✨'
+        ];
       case 'party':
-        return ['🎉', '🚀', '🔥', '🏆', '⭐', '🎈', '🥳', '💥', '✨'];
+        return [
+          '🎉', '🏆', '⭐', '🎈', '🥳', '💥', '✨', '🍕', '🕶️', '🔥',
+          'LEGEND! 🏆', 'BRO! 🗿', 'BOOM! 💥', 'W! 🥳', 'CHAD 💪'
+        ];
       case 'danger':
-        return ['🚨', '⚠️', '👀', '❌', '🛑', '🔥', '⚡'];
+        return [
+          '🚨', '⚠️', '👀', '❌', '🛑', '🔥', '⚡', '🏃‍♂️', '💨',
+          'RUN! 💨', 'OOPS! 🙈', 'DODGE! ⚡', 'MISS! 🎯'
+        ];
       case 'cool':
       default:
-        return ['🚀', '⚡', '🕶️', '🔥', '🎮', '👾', '✨', '🍕', '👀', '🧠'];
+        return [
+          '🚀', '⚡', '🕶️', '🔥', '🎮', '👾', '✨', '🍕', '👀', '🧠', '🗿', '💯',
+          'BRO! 👊', 'YO! 🤙', 'GAMER 🎮', 'POW! 💥'
+        ];
     }
   }, [theme]);
 
   const particles: Particle[] = useMemo(() => {
-    const count = theme === 'princess' ? 36 : 18;
-    return Array.from({ length: count }).map((_, i) => ({
-      id: i,
-      emoji: emojiSet[i % emojiSet.length],
-      left: Math.random() * 95,
-      duration: theme === 'princess' ? 7 + Math.random() * 8 : 10 + Math.random() * 12,
-      delay: Math.random() * 6,
-      size: theme === 'princess' ? 22 + Math.random() * 26 : 18 + Math.random() * 22,
-    }));
-  }, [emojiSet, theme]);
+    const count = theme === 'princess' ? 30 : 20;
+    return Array.from({ length: count }).map((_, i) => {
+      const val = items[i % items.length];
+      const isSticker = val.includes(' ');
+      return {
+        id: i,
+        item: val,
+        left: Math.random() * 92,
+        duration: 9 + Math.random() * 10,
+        delay: Math.random() * 6,
+        size: isSticker ? 13 : 24 + Math.random() * 18,
+        isSticker,
+      };
+    });
+  }, [items, theme]);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {particles.map((p) => (
         <span
           key={p.id}
-          className="floating-particle select-none opacity-40 hover:opacity-80 transition-opacity"
+          className={`comic-particle select-none ${
+            p.isSticker
+              ? 'px-2.5 py-1 rounded-full bg-yellow-300 text-black border-2 border-black font-black uppercase text-xs shadow-[3px_3px_0px_#000]'
+              : ''
+          }`}
           style={{
             left: `${p.left}%`,
             animationDuration: `${p.duration}s`,
             animationDelay: `${p.delay}s`,
-            fontSize: `${p.size}px`,
+            fontSize: p.isSticker ? '12px' : `${p.size}px`,
           }}
         >
-          {p.emoji}
+          {p.item}
         </span>
       ))}
-      {/* Dynamic ambient background blobs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-fast" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-fast" style={{ animationDelay: '1.5s' }} />
+      
+      {/* Cartoon ambient colorful light blobs */}
+      <div className="absolute top-10 left-10 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl pointer-events-none" />
       {theme === 'princess' && (
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-pink-500/25 rounded-full blur-3xl pointer-events-none animate-pulse-fast" />
+        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-fuchsia-400/20 rounded-full blur-3xl pointer-events-none" />
       )}
     </div>
   );

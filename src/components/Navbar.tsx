@@ -30,47 +30,49 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const stepLabels: { [key: number]: string } = {
-    1: '1. Identification',
-    2: '2. Gender Investigation',
-    3: '3. AI Verdict',
-    4: '4. Agility Test',
-    5: '5. Grand Finale 🏆',
+    1: 'Stage 1: Identification 🕵️',
+    2: 'Stage 2: Interrogation 🧠',
+    3: 'Stage 3: AI Verdict ⚖️',
+    4: 'Stage 4: Dodge Challenge ⚡',
+    5: 'Stage 5: Grand Finale 🏆',
   };
 
   return (
-    <header className="relative z-30 w-full px-4 py-3 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
+    <header className="relative z-30 w-full px-4 py-3 bg-yellow-400 border-b-4 border-black shadow-[0_4px_0_#000]">
       <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Brand & Creators */}
-        <div className="flex items-center space-x-2">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 text-white font-extrabold text-lg">
+        <div className="flex items-center space-x-2.5">
+          <div className="w-11 h-11 rounded-2xl bg-cyan-400 border-3 border-black flex items-center justify-center shadow-[3px_3px_0px_#000] text-black font-black text-2xl transform -rotate-3 hover:rotate-6 transition-transform">
             ♂️
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-sm tracking-wide text-white">MEN'S DAY 2026</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                Nov 19
+              <span className="font-black text-base tracking-wide text-black uppercase">
+                MEN'S DAY 2026
+              </span>
+              <span className="text-[11px] uppercase font-black px-2 py-0.5 rounded-full bg-pink-400 text-black border-2 border-black shadow-[2px_2px_0px_#000]">
+                NOV 19 🔥
               </span>
             </div>
-            <p className="text-xs text-slate-400 flex items-center gap-1">
-              Crafted by{' '}
+            <p className="text-xs text-slate-900 font-extrabold flex items-center gap-1">
+              By{' '}
               <button
                 onClick={() => setShowSettings(true)}
-                className="text-indigo-400 hover:text-indigo-300 underline font-semibold transition-colors"
+                className="text-indigo-900 hover:text-indigo-700 underline font-black transition-colors"
                 title="Click to customize creator name"
               >
                 {creatorName}
               </button>{' '}
-              &amp; <span className="text-purple-400 font-semibold">don</span>
+              &amp; <span className="text-purple-900 font-black">don</span>
             </p>
           </div>
         </div>
 
         {/* Current Stage Indicator */}
-        <div className="hidden md:flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs text-slate-300">
-          <Sparkles className="w-3.5 h-3.5 text-yellow-400 animate-spin-slow" />
-          <span>Stage:</span>
-          <span className="font-bold text-white bg-indigo-500/30 px-2 py-0.5 rounded-full border border-indigo-500/30">
+        <div className="hidden md:flex items-center gap-2 bg-white border-3 border-black px-4 py-1.5 rounded-2xl text-xs font-black text-black shadow-[3px_3px_0px_#000] transform rotate-1">
+          <Sparkles className="w-4 h-4 text-amber-500 animate-spin-slow" />
+          <span>MISSION:</span>
+          <span className="bg-cyan-300 px-2.5 py-0.5 rounded-xl border-2 border-black">
             {stepLabels[currentStep] || 'Verification Protocol'}
           </span>
         </div>
@@ -80,14 +82,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Sound Toggle */}
           <button
             onClick={handleToggleSound}
-            className={`p-2 rounded-xl transition-all border ${
+            className={`p-2.5 rounded-2xl transition-all border-3 border-black shadow-[3px_3px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none font-black ${
               muted
-                ? 'bg-slate-800/80 border-slate-700 text-slate-400 hover:text-white'
-                : 'bg-indigo-600/30 border-indigo-500/40 text-indigo-300 hover:bg-indigo-600/50 shadow-sm shadow-indigo-500/20'
+                ? 'bg-slate-200 text-slate-600'
+                : 'bg-emerald-400 text-black animate-pulse'
             }`}
             title={muted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
           >
-            {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           </button>
 
           {/* Settings / Mode Switcher */}
@@ -96,25 +98,25 @@ export const Navbar: React.FC<NavbarProps> = ({
               playClick();
               setShowSettings(!showSettings);
             }}
-            className="p-2 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-600 transition-all"
+            className="p-2.5 rounded-2xl bg-white border-3 border-black text-black shadow-[3px_3px_0px_#000] hover:bg-slate-100 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
             title="Prank Settings & Storyline Switcher"
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="w-5 h-5" />
           </button>
 
           {/* Reset button */}
           <button
             onClick={() => {
               playClick();
-              if (confirm('Start the prank verification over from the beginning?')) {
+              if (confirm('Restart the prank from beginning?')) {
                 onReset();
               }
             }}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs font-semibold text-slate-300 hover:text-white transition-all"
+            className="flex items-center space-x-1.5 px-3.5 py-2 rounded-2xl bg-pink-400 border-3 border-black text-xs font-black text-black shadow-[3px_3px_0px_#000] hover:bg-pink-300 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
             title="Reset verification process"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Restart</span>
+            <RefreshCw className="w-4 h-4" />
+            <span className="hidden sm:inline">RESTART</span>
           </button>
         </div>
       </div>
@@ -122,31 +124,31 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Settings Modal */}
       {showSettings && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-indigo-500/40 rounded-2xl p-6 max-w-md w-full shadow-2xl relative">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Settings className="w-5 h-5 text-indigo-400" />
-                Prank Settings & Testing Mode
+          <div className="bg-yellow-300 border-4 border-black rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-[10px_10px_0px_#000] relative text-black font-['Fredoka',sans-serif]">
+            <div className="flex items-center justify-between pb-3 border-b-3 border-black mb-4">
+              <h3 className="text-xl font-black text-black flex items-center gap-2">
+                <Settings className="w-6 h-6 text-black" />
+                PRANK SECRET CONTROLS 🕹️
               </h3>
               <button
                 onClick={() => setShowSettings(false)}
-                className="text-slate-400 hover:text-white font-bold text-lg"
+                className="w-9 h-9 rounded-xl bg-rose-400 border-2 border-black flex items-center justify-center font-black text-lg shadow-[2px_2px_0px_#000] hover:bg-rose-300 active:translate-x-0.5 active:translate-y-0.5"
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-4 text-sm">
+            <div className="space-y-4 text-sm font-bold">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Co-Creator Name (Along with don):
+                <label className="block text-xs uppercase font-black text-black mb-1">
+                  Creator Name (Along with don):
                 </label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     value={tempCreator}
                     onChange={(e) => setTempCreator(e.target.value)}
-                    className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-indigo-500"
+                    className="flex-1 bg-white border-3 border-black rounded-xl px-3 py-2 text-black text-sm font-black focus:outline-none shadow-[2px_2px_0px_#000]"
                     placeholder="e.g. dwarf"
                   />
                   <button
@@ -154,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onUpdateCreatorName(tempCreator || 'dwarf');
                       playClick();
                     }}
-                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-lg transition-colors"
+                    className="cartoon-btn px-4 py-2 bg-emerald-400 hover:bg-emerald-300 text-black text-xs uppercase"
                   >
                     Save
                   </button>
@@ -162,11 +164,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  AI Verdict Simulation Mode:
+                <label className="block text-xs uppercase font-black text-black mb-1">
+                  Force Storyline Outcome:
                 </label>
-                <p className="text-xs text-slate-400 mb-2">
-                  Easily preview both hilarious branches (Page 3A vs Page 3B):
+                <p className="text-xs text-slate-800 mb-2 font-medium">
+                  Test the Princess Rejection screen or the Bro Agility flow:
                 </p>
                 <div className="grid grid-cols-3 gap-2">
                   <button
@@ -174,52 +176,48 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onSetTestModeGender('auto');
                       playClick();
                     }}
-                    className={`py-2 px-2 rounded-lg text-xs font-bold border transition-all ${
+                    className={`cartoon-btn py-2 px-1 text-xs uppercase ${
                       testModeGender === 'auto'
-                        ? 'bg-indigo-600 border-indigo-400 text-white'
-                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                        ? 'bg-cyan-400 text-black'
+                        : 'bg-white text-slate-700'
                     }`}
                   >
-                    🤖 Auto (Answers)
+                    🤖 Auto
                   </button>
                   <button
                     onClick={() => {
                       onSetTestModeGender('woman');
                       playClick();
                     }}
-                    className={`py-2 px-2 rounded-lg text-xs font-bold border transition-all ${
+                    className={`cartoon-btn py-2 px-1 text-xs uppercase ${
                       testModeGender === 'woman'
-                        ? 'bg-pink-600 border-pink-400 text-white'
-                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                        ? 'bg-pink-400 text-black'
+                        : 'bg-white text-slate-700'
                     }`}
                   >
-                    👑 Force Princess (3A)
+                    👑 Princess (3A)
                   </button>
                   <button
                     onClick={() => {
                       onSetTestModeGender('man');
                       playClick();
                     }}
-                    className={`py-2 px-2 rounded-lg text-xs font-bold border transition-all ${
+                    className={`cartoon-btn py-2 px-1 text-xs uppercase ${
                       testModeGender === 'man'
-                        ? 'bg-blue-600 border-blue-400 text-white'
-                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                        ? 'bg-emerald-400 text-black'
+                        : 'bg-white text-slate-700'
                     }`}
                   >
-                    😎 Force Bro (3B)
+                    😎 Bro (3B)
                   </button>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-white/10 text-xs text-slate-400">
-                <p>💡 Tip: You can test the Princess Rejection screen and jump back anytime!</p>
-              </div>
-
               <button
                 onClick={() => setShowSettings(false)}
-                className="w-full py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-colors mt-2"
+                className="cartoon-btn w-full py-3 bg-black text-yellow-300 hover:bg-slate-900 text-sm uppercase mt-4"
               >
-                Close Settings
+                Close Controls 🚀
               </button>
             </div>
           </div>

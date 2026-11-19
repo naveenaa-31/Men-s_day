@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Cpu, Terminal, Zap, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { Terminal, Zap, CheckCircle2 } from 'lucide-react';
 import { playClick, playSuccessDing } from '../utils/audio';
 
 interface ScanLoadingModalProps {
@@ -23,7 +23,6 @@ export const ScanLoadingModal: React.FC<ScanLoadingModalProps> = ({
   useEffect(() => {
     const stageIntervalTime = durationMs / stages.length;
     
-    // Interval for stages
     const stageTimer = setInterval(() => {
       setCurrentStageIndex((prev) => {
         if (prev < stages.length - 1) {
@@ -34,7 +33,6 @@ export const ScanLoadingModal: React.FC<ScanLoadingModalProps> = ({
       });
     }, stageIntervalTime);
 
-    // Progress bar animation
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -45,7 +43,6 @@ export const ScanLoadingModal: React.FC<ScanLoadingModalProps> = ({
       });
     }, durationMs / 35);
 
-    // Completion timeout
     const completeTimer = setTimeout(() => {
       playSuccessDing();
       onComplete();
@@ -59,45 +56,39 @@ export const ScanLoadingModal: React.FC<ScanLoadingModalProps> = ({
   }, [durationMs, onComplete, stages.length]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl animate-fadeIn">
-      {/* Background cyber grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
-
-      <div className="relative w-full max-w-lg glass-card-glow rounded-3xl p-8 border border-indigo-500/40 text-center shadow-2xl overflow-hidden">
-        {/* Animated Scanner Ray */}
-        <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#22d3ee] animate-bounce pointer-events-none top-0" />
-
-        {/* Central glowing icon */}
-        <div className="relative mx-auto w-24 h-24 mb-6 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full bg-indigo-500/20 animate-ping" />
-          <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-xl shadow-indigo-500/40 border border-white/20">
-            <Cpu className="w-10 h-10 text-white animate-pulse" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-yellow-300 rounded-3xl p-7 border-4 border-black text-center shadow-[10px_10px_0px_#000] text-black font-['Fredoka',sans-serif]">
+        
+        {/* Animated Cartoon Radar Icon */}
+        <div className="relative mx-auto w-24 h-24 mb-4 flex items-center justify-center">
+          <div className="w-20 h-20 rounded-3xl bg-pink-400 border-4 border-black flex items-center justify-center shadow-[4px_4px_0px_#000] transform -rotate-6 animate-jelly">
+            <span className="text-4xl animate-bounce">🤖</span>
           </div>
         </div>
 
         {/* Title */}
-        <h3 className="text-xl sm:text-2xl font-black text-white tracking-wide uppercase mb-1">
+        <h3 className="text-2xl sm:text-3xl font-black text-black tracking-wide uppercase mb-1">
           {title}
         </h3>
-        <p className="text-xs text-indigo-300 font-mono tracking-wider mb-6">
-          TARGET: <span className="text-white font-bold">{userName.toUpperCase()}</span> // BIOMETRIC LOCK ACTIVE
+        <p className="text-xs uppercase font-black text-slate-800 tracking-wider mb-5 bg-white border-2 border-black inline-block px-3 py-1 rounded-full shadow-[2px_2px_0px_#000]">
+          SUBJECT: <span className="text-pink-600 font-black">{userName.toUpperCase()}</span> 🔍
         </p>
 
-        {/* Dynamic Progress Bar */}
-        <div className="w-full bg-slate-800/80 rounded-full h-3 mb-6 p-0.5 border border-white/10 overflow-hidden">
+        {/* Chunky Cartoon Progress Bar */}
+        <div className="w-full bg-white rounded-2xl h-6 mb-5 p-1 border-3 border-black shadow-[4px_4px_0px_#000] overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-pink-500 rounded-full transition-all duration-150 ease-out shadow-[0_0_12px_rgba(99,102,241,0.8)]"
+            className="h-full bg-gradient-to-r from-cyan-400 via-emerald-400 to-pink-500 rounded-xl transition-all duration-150 ease-out border-2 border-black"
             style={{ width: `${progress}%` }}
           />
         </div>
 
-        {/* Stage List / Current Activity */}
-        <div className="bg-slate-900/80 border border-white/10 rounded-2xl p-4 text-left space-y-2.5 font-mono text-xs">
-          <div className="flex items-center justify-between text-slate-400 pb-2 border-b border-white/10">
-            <span className="flex items-center gap-1.5 text-indigo-400">
-              <Terminal className="w-3.5 h-3.5" /> NEURAL_CONSOLE.SYS
+        {/* Stage List / Cartoon Console */}
+        <div className="bg-white border-3 border-black rounded-2xl p-4 text-left space-y-2 font-black text-xs shadow-[4px_4px_0px_#000]">
+          <div className="flex items-center justify-between text-slate-700 pb-2 border-b-2 border-black">
+            <span className="flex items-center gap-1.5 text-black uppercase">
+              <Terminal className="w-4 h-4 text-black" /> BRAIN_SCANNER.EXE
             </span>
-            <span className="text-emerald-400 font-bold">{progress}% DONE</span>
+            <span className="text-emerald-600 font-black text-sm">{progress}%</span>
           </div>
 
           {stages.map((stage, idx) => {
@@ -106,32 +97,26 @@ export const ScanLoadingModal: React.FC<ScanLoadingModalProps> = ({
             return (
               <div
                 key={idx}
-                className={`flex items-center gap-2 transition-all duration-300 ${
+                className={`flex items-center gap-2 transition-all duration-200 ${
                   isDone
-                    ? 'text-emerald-400 opacity-70'
+                    ? 'text-emerald-700'
                     : isCurrent
-                    ? 'text-white font-bold scale-[1.02]'
-                    : 'text-slate-600 opacity-40'
+                    ? 'text-pink-600 scale-[1.02] font-black'
+                    : 'text-slate-400'
                 }`}
               >
                 {isDone ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-600" />
                 ) : isCurrent ? (
-                  <Zap className="w-3.5 h-3.5 flex-shrink-0 text-yellow-400 animate-spin" />
+                  <Zap className="w-4 h-4 flex-shrink-0 text-amber-500 animate-spin" />
                 ) : (
-                  <div className="w-3.5 h-3.5 rounded-full border border-slate-600 flex-shrink-0" />
+                  <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-400 flex-shrink-0" />
                 )}
                 <span className="truncate">{stage}</span>
               </div>
             );
           })}
         </div>
-
-        {/* Footer warning */}
-        <p className="mt-6 text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
-          <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
-          Please do not blink or look away from the screen during neural calibration.
-        </p>
       </div>
     </div>
   );
