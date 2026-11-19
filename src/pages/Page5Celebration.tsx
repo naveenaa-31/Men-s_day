@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Trophy, Heart, Sparkles, Award, RefreshCw, Share2, FileText, CheckCircle2, MessageCircleHeart, HelpCircle } from 'lucide-react';
+import { Trophy, Heart, Sparkles, Award, RefreshCw, Share2, FileText, CheckCircle2, MessageCircleHeart, HelpCircle, Gift, Flower2 } from 'lucide-react';
 import { playVictoryFanfare, playClick, playSuccessDing } from '../utils/audio';
 import { AnalysisResult } from '../utils/aiAnalysis';
 import { QuestionOption } from '../data/questions';
@@ -22,6 +22,28 @@ export const Page5Celebration: React.FC<Page5CelebrationProps> = ({
 }) => {
   const [showReportModal, setShowReportModal] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [isGiftOpen, setIsGiftOpen] = useState(false);
+
+  const handleOpenGift = () => {
+    setIsGiftOpen(true);
+    playVictoryFanfare();
+    confetti({
+      particleCount: 130,
+      spread: 110,
+      origin: { y: 0.6 },
+      colors: ['#f43f5e', '#ec4899', '#fde047', '#38bdf8', '#4ade80'],
+    });
+  };
+
+  const triggerFlowerPetals = () => {
+    playSuccessDing();
+    confetti({
+      particleCount: 80,
+      spread: 90,
+      origin: { y: 0.5 },
+      colors: ['#fb7185', '#fda4af', '#f43f5e', '#fef08a', '#86efac'],
+    });
+  };
 
   useEffect(() => {
     playVictoryFanfare();
@@ -190,6 +212,88 @@ export const Page5Celebration: React.FC<Page5CelebrationProps> = ({
         <p className="text-xs text-black font-black uppercase tracking-widest">
           — With love, {creatorName} &amp; don ❤️
         </p>
+      </div>
+
+      {/* Interactive Gift Box Surprise: Flowers for the Bro! */}
+      <div className="w-full max-w-2xl mb-8">
+        {!isGiftOpen ? (
+          <div
+            onClick={handleOpenGift}
+            className="cartoon-card p-6 sm:p-8 bg-gradient-to-r from-pink-300 via-rose-300 to-yellow-300 text-center cursor-pointer shadow-[8px_8px_0px_#000] border-4 border-black transform hover:scale-[1.02] active:scale-95 transition-all select-none"
+          >
+            <div className="cartoon-sticker px-3 py-1 bg-white text-black text-xs font-black uppercase mb-3 shadow-[3px_3px_0px_#000] -rotate-2">
+              <Gift className="w-4 h-4 text-pink-600 stroke-[3]" />
+              <span>SPECIAL DELIVERY FOR {userName.toUpperCase()}! 📦</span>
+            </div>
+
+            <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto my-3 relative animate-bounce-slow">
+              <div className="w-full h-full rounded-3xl bg-pink-500 border-4 border-black flex items-center justify-center shadow-[6px_6px_0px_#000] transform -rotate-3 text-5xl sm:text-6xl">
+                🎁
+              </div>
+              <Sparkles className="absolute -top-3 -right-3 w-8 h-8 text-yellow-400 animate-spin-slow" />
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-black text-black uppercase drop-shadow-[1px_1px_0px_#fff] mb-1">
+              TAP TO OPEN YOUR GIFT! 🎁✨
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-800 font-extrabold uppercase">
+              (Trust us, you're gonna love this one bro)
+            </p>
+          </div>
+        ) : (
+          <div className="cartoon-card p-6 sm:p-8 bg-white border-4 border-black shadow-[8px_8px_0px_#000] text-center animate-jelly relative overflow-visible">
+            {/* Top Comic Badge */}
+            <div className="cartoon-sticker px-4 py-1.5 bg-yellow-300 text-black text-xs font-black uppercase mb-4 shadow-[3px_3px_0px_#000] -rotate-1">
+              <Flower2 className="w-4 h-4 text-rose-500 stroke-[3]" />
+              <span>A BOUQUET FOR OUR HERO! 💐</span>
+            </div>
+
+            {/* Character popping out with flowers */}
+            <div className="relative mx-auto my-2 w-32 h-32 flex items-center justify-center">
+              <div className="w-28 h-28 rounded-full bg-cyan-200 border-4 border-black flex items-center justify-center shadow-[4px_4px_0px_#000] text-6xl transform hover:rotate-12 transition-transform">
+                🧔‍♂️
+              </div>
+              <div className="absolute -bottom-2 -right-2 text-5xl animate-bounce">
+                💐
+              </div>
+            </div>
+
+            {/* Speech bubble */}
+            <div className="bg-pink-100 border-3 border-black rounded-2xl p-4 sm:p-5 my-4 shadow-[4px_4px_0px_#000] text-left">
+              <h4 className="text-lg sm:text-2xl font-black text-black mb-1 uppercase text-center">
+                HERE'S YOUR BOUQUET, {userName.toUpperCase()}! 💐✨
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-900 font-black text-center uppercase mb-3 text-pink-600">
+                HAPPY INTERNATIONAL MEN'S DAY, KING! 👑
+              </p>
+              <p className="text-xs sm:text-sm text-slate-800 font-bold leading-relaxed text-center">
+                "They say most men only receive their first flowers at their funeral... <strong>NOT ON OUR WATCH!</strong> Here is your fresh virtual bouquet of love, respect, and unconditional bromance! You deserve your flowers today and every day!" ❤️
+              </p>
+            </div>
+
+            {/* Interactive Flower Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={triggerFlowerPetals}
+                className="cartoon-btn px-4 py-2.5 bg-pink-400 hover:bg-pink-300 text-black text-xs uppercase shadow-[3px_3px_0px_#000] flex items-center gap-1.5"
+              >
+                <Sparkles className="w-4 h-4 text-black" />
+                <span>Shower More Petals! 🌸</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  setIsGiftOpen(false);
+                }}
+                className="cartoon-btn px-4 py-2.5 bg-yellow-300 hover:bg-yellow-200 text-black text-xs uppercase shadow-[3px_3px_0px_#000] flex items-center gap-1.5"
+              >
+                <span>Wrap Box Again 🎁</span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Action Buttons Row */}
